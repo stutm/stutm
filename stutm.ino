@@ -69,19 +69,19 @@ void loop() {
 		nfc.PrintHex(uid, uidLength);
 		if (uidLength == 7) {      
 			uint8_t data[32];
-	  	success = nfc.mifareultralight_ReadPage (4, data);
-	  	if(success = "39 32 2E 31 36 38 2E 31 2E 39 35 2F 68 75 62 2E"){
-	    	String getData = "GET /hub.php";
-	    	sendCommand("AT+CIPMUX=1",5,"OK");
-	    	sendCommand("AT+CIPSTART=0,\"TCP\",\""+ HOST +"\","+ PORT,15,"OK");
-	    	sendCommand("AT+CIPSEND=0," +String(getData.length()+4),4,">");
-	    	esp8266.println(getData);
-	    	delay(1500);
-	    	countTrueCommand++;
-	    	sendCommand("AT+CIPCLOSE=0",5,"OK");
-	   	} else {
+		  	success = nfc.mifareultralight_ReadPage (4, data);
+		  	if(success = "39 32 2E 31 36 38 2E 31 2E 39 35 2F 68 75 62 2E"){
+		    	String getData = "GET /hub.php";
+		    	sendCommand("AT+CIPMUX=1",5,"OK");
+		    	sendCommand("AT+CIPSTART=0,\"TCP\",\""+ HOST +"\","+ PORT,15,"OK");
+		    	sendCommand("AT+CIPSEND=0," +String(getData.length()+4),4,">");
+		    	esp8266.println(getData);
+		    	delay(1500);
+		    	countTrueCommand++;
+		    	sendCommand("AT+CIPCLOSE=0",5,"OK");
+		   	} else {
 				Serial.print("NO");
-	   	}
+		   	}
 		}
 	}
 }
@@ -92,7 +92,7 @@ void sendCommand(String command, int maxTime, char readReplay[]) {
   	while(countTimeCommand < (maxTime*1)) {
   		esp8266.println(command);
   		if(esp8266.find(readReplay)) {
-				found = true;
+			found = true;
 			break;
 		}
 		countTimeCommand++;
